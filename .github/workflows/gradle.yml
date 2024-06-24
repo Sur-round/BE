@@ -82,20 +82,9 @@ jobs:
         aws-region: ap-northeast-2
     
     # Add github ip to AWS 
-#    - name: Add GitHub IP to AWS
-#      run: |
-#        aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2
-#      env:
-#        AWS_DEFAULT_REGION: ap-northeast-2
-#        AWS_REGION: ap-northeast-2
-
-
-    - name: Add GitHub IP to AWS Security Group
+    - name: Add GitHub IP to AWS
       run: |
-        existing_rule=$(aws ec2 describe-security-group-rules --filters Name=group-id,Values=${{ secrets.AWS_SG_ID }} Name=cidr,Values=${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2 --query 'SecurityGroupRules[*].[CidrIpv4,IpProtocol,FromPort,ToPort]' --output text)
-        if [ -z "$existing_rule" ]; then
-          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2
-        fi
+        aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2
       env:
         AWS_DEFAULT_REGION: ap-northeast-2
         AWS_REGION: ap-northeast-2
