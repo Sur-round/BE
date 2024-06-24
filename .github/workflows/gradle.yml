@@ -82,12 +82,12 @@ jobs:
         aws-region: ap-northeast-2
     
     # Add github ip to AWS 
-    - name: Add GitHub IP to AWS
-      run: |
-        aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2
-      env:
-        AWS_DEFAULT_REGION: ap-northeast-2
-        AWS_REGION: ap-northeast-2
+#    - name: Add GitHub IP to AWS
+#      run: |
+#        aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-2
+#      env:
+#        AWS_DEFAULT_REGION: ap-northeast-2
+#        AWS_REGION: ap-northeast-2
 
 
     - name: Add GitHub IP to AWS Security Group
