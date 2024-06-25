@@ -12,12 +12,15 @@ import java.util.stream.StreamSupport;
 @Service
 public class SurroundUrlService {
 
+    private final SurroundUrlRepository repository;
+
     @Autowired
-    private SurroundUrlRepository repository;
+    public SurroundUrlService(SurroundUrlRepository repository) {
+        this.repository = repository;
+    }
 
     public List<SurroundUrl> getAllSurroundUrls() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return repository.findAll();  // Directly return the list
     }
 
     public SurroundUrl saveSurroundUrl(SurroundUrl surroundUrl) {
