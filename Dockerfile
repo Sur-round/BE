@@ -9,7 +9,7 @@ ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 
 #ENV JAVA_OPTS="-Dspring.profiles.active=prod -Dlogging.level.org.springfra
-#1
+#1kk
 
 # 운영 및 개발에서 사용되는 환경 설정을 분리
 # "-Dspring.profiles.active=prod",
