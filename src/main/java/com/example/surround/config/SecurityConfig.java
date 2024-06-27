@@ -28,8 +28,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // 자격 증명을 포함한 요청을 허용
-        config.addAllowedOrigin("http://surround-bucket.s3-website.ap-northeast-2.amazonaws.com"); // 허용할 출처 명시
+        config.setAllowCredentials(false); // 자격 증명을 포함한 요청을 허용
+        config.addAllowedOrigin("*"); // 허용할 출처 명시
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
