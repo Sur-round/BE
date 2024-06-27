@@ -19,8 +19,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/**").permitAll() // 모든 경로에 대해 허용
                 );
         return http.build();
     }
@@ -29,10 +28,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://surround-bucket.s3-website.ap-northeast-2.amazonaws.com");
-        // 필요한 모든 출처를 추가합니다.
-        config.addAllowedOrigin("http://another-allowed-origin.com");
+        config.setAllowCredentials(false);
+        config.addAllowedOriginPattern("*"); // 모든 출처 허용
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
