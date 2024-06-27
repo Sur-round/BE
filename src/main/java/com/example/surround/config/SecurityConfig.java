@@ -31,7 +31,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://surround-bucket.s3-website.ap-northeast-2.amazonaws.com"); // 허용할 출처 설정
+        config.addAllowedOriginPattern("*"); // 모든 출처 허용
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
