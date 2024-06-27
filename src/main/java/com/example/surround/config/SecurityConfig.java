@@ -31,15 +31,12 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("*"); // 모든 출처 허용
+        // 허용할 출처를 명시적으로 추가합니다.
+        config.addAllowedOrigin("http://surround-bucket.s3-website.ap-northeast-2.amazonaws.com");
+        config.addAllowedOrigin("http://another-allowed-origin.com");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return source;
-    }
-
-    @Bean
-    public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
     }
 }
