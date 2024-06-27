@@ -1,7 +1,7 @@
 package com.example.surround.controller;
 
-import com.example.surround.model.SurroundSite;
-import com.example.surround.service.SurroundSiteService;
+import com.example.surround.model.SurroundUrl;
+import com.example.surround.service.SurroundUrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +13,25 @@ import java.util.List;
 @RestController
 @Validated
 @RequestMapping("/api/v1")
-public class SurroundSiteController {
+public class SurroundUrlController {
 
-    private final SurroundSiteService service;
-    private static final Logger logger = LoggerFactory.getLogger(SurroundSiteController.class);
+    private final SurroundUrlService service;
+    private static final Logger logger = LoggerFactory.getLogger(SurroundUrlController.class);
 
     @Autowired
-    public SurroundSiteController(SurroundSiteService service) {
+    public SurroundUrlController(SurroundUrlService service) {
         this.service = service;
     }
 
-    @GetMapping("/sites")
-    public List<SurroundSite> getSurroundSites(@RequestParam(required = false) String category) {
-        if (category != null) {
-            logger.info("Fetching surround sites by category: {}", category);
-            return service.getSurroundSitesByCategory(category);
-        } else {
-            logger.info("Fetching all surround sites");
-            return service.getAllSurroundSites();
-        }
+    @GetMapping("/url")
+    public List<SurroundUrl> getSurroundUrls() {
+        logger.info("Fetching all surround URLs");
+        return service.getAllSurroundUrls();
     }
 
-    @PostMapping("/sites")
-    public SurroundSite createSurroundSite(@RequestBody SurroundSite surroundSite) {
-        logger.info("Creating a new surround site: {}", surroundSite);
-        return service.saveSurroundSite(surroundSite);
+    @PostMapping("/url")
+    public SurroundUrl createSurroundUrl(@RequestBody SurroundUrl surroundUrl) {
+        logger.info("Creating a new surround URL: {}", surroundUrl);
+        return service.saveSurroundUrl(surroundUrl);
     }
 }
